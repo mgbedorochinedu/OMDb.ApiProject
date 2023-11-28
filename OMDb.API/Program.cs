@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using OMDb.API.Authentication;
 using OMDb.API.DataContext;
 using OMDb.API.Services.MovieService;
 using System.Text.Json.Serialization;
@@ -18,7 +20,12 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    
+});
+
+builder.Services.AddScoped<ApiKeyAuthFilter>(); //Have control which endpoint to Authorized
 
 var app = builder.Build();
 
@@ -30,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 app.UseAuthorization();
 
