@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OMDb.API.Authentication;
 using OMDb.API.DataContext;
+using OMDb.API.Options;
 using OMDb.API.Services.MovieService;
 using System.Text.Json.Serialization;
 
@@ -14,6 +15,9 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddDbContext<DataContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+builder.Services.AddOptions();
+builder.Configuration.GetSection("AppSettingsConfig").Get<AppSettingsConfig>();
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 
