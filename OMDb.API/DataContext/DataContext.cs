@@ -6,4 +6,6 @@ namespace OMDb.API.DataContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
     }
+
+
 }
