@@ -20,12 +20,11 @@ namespace OMDb.API.Services.MovieService
         {
             using var httpClient = new HttpClient();
 
-            string API_KEY = "b5eb089";
+            string API_KEY = _appSettings.ApiKey;
 
-            string OMDB_API_URL = "http://www.omdbapi.com/";
+            string OMDB_API_URL = _appSettings.OmdbURL;
 
             string baseUrl = $"{OMDB_API_URL}?apiKey={API_KEY}&t={search}";
-
 
             try
             {
@@ -48,12 +47,12 @@ namespace OMDb.API.Services.MovieService
             }
             catch (Exception ex)
             {
-                //Add Exception Log here:
+                //TODO: Add Exception Log here:
                 throw;
             }
         }
 
-       
+
 
 
     }

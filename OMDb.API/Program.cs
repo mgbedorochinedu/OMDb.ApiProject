@@ -8,6 +8,8 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -15,9 +17,9 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddDbContext<DataContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.Configure<AppSettingsConfig>(builder.Configuration.GetSection("AppSettings"));
 
 builder.Services.AddOptions();
-builder.Configuration.GetSection("AppSettingsConfig").Get<AppSettingsConfig>();
 
 builder.Services.AddScoped<IMovieService, MovieService>();
 
